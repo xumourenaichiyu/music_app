@@ -1,0 +1,23 @@
+.music_item{
+    margin: .1rem 0;
+    .music_name{
+        font-size: 14px;
+    }
+    .music_info{
+        margin-left: .1rem;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+        padding: .06rem 0;
+        .songers{
+            .songer{
+                padding-right:.1rem;
+                font-size: 12px;
+            }
+        }
+    }
+    .music_info,.music_name{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+}

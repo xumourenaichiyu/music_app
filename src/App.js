@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component ,Suspense,lazy} from 'react';
+import {HashRouter as Router,Route} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const Index = lazy(()=>import('./Page/Index/Index'));
+const PlayList = lazy(()=>import('./Page/playlist/Playlist'));
+const MusicList = lazy(()=>import('./Page/musiclist/MusicList'));
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {  }
+    }
+    render() { 
+        return ( 
+            <>
+                <Router>
+                    <Suspense fallback={<div>加载中</div>}>
+                        <Route exact path='/' component={Index} />
+                        <Route path='/playlist' component={PlayList} />
+                        <Route path='/musiclist/:id' component={MusicList} />
+                    </Suspense>
+                </Router>
+                
+            </>
+         );
+    }
 }
-
+ 
 export default App;
