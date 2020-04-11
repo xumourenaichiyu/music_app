@@ -52,7 +52,6 @@ class PlayList extends Component {
                 {
                     playList.map(ele => (
                         <PlayItem
-
                             key={ele.id}
                             data={ele}
                         />

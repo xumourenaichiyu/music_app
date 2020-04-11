@@ -11,7 +11,7 @@ function MusicItem(props){
                 <p className='music_name'>{data.name}</p>
                 <p className='songers'>
                     {data.ar.map(e=>(
-                        <span className='songer' key={e.id}>{e.name}</span>
+                        <span className='songer' key={e.name}>{e.name}</span>
                     ))}
                 </p>
             </div>

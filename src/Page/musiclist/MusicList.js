@@ -1,7 +1,9 @@
 //歌单详情页
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
 import './MusicList.scss';
-import MusicItem from '../../components/MusicItem/MusicItem'
+import MusicItem from '../../components/MusicItem/MusicItem';
+import {tipToast} from '../../assets/js/tipToast';
 class MusicList extends Component {
     constructor(props) {
         super(props);
@@ -23,6 +25,21 @@ class MusicList extends Component {
             })
         }
     }
+
+    //获取歌曲url 
+    getMusicUrl = async (id)=>{
+        let res = await this.$axios.post(`/song/url?id=${id}`);
+        let data = res.data.data;
+        
+        if(res.status === 200 && res.data.code === 200){
+            if(data[0].url){
+                this.props.Audio.src = data[0].url;
+                this.props.Audio.play();
+            }else{
+                tipToast('播放失败',1500)
+            }
+        }
+    }
     render() {
         let {tracks,coverImgUrl} = this.state.playlist; 
         return ( 
@@ -33,10 +50,11 @@ class MusicList extends Component {
                 <div className='music_list_item'>
                     {
                         (tracks||[]).map(ele=>(
-                            <MusicItem
-                                key={ele.id}
-                                data={ele}
-                            />
+                            <div key={ele.id} onClick={()=>{this.getMusicUrl(ele.id)}}>
+                                <MusicItem
+                                    data={ele}
+                                />
+                            </div>
                         ))
                     }
                 </div>
@@ -45,4 +63,10 @@ class MusicList extends Component {
     }
 }
  
-export default MusicList;
+function mapStateToProps(state){
+    return {
+        Audio : state.player.Audio
+    }
+}
+
+export default connect(mapStateToProps,null)(MusicList);

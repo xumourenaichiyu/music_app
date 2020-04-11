@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 class PlayAudio extends Component {
     constructor(props) {
         super(props);
@@ -9,7 +10,7 @@ class PlayAudio extends Component {
     render() { 
         return ( 
             <div>
-                <audio src='' controls/>
+                <audio src={this.props.src} controls autoPlay={true} style={{display:none}}/>
             </div>
             
          );
@@ -20,4 +21,4 @@ const mapStateToProps = (state)=>{
         src : state.player.AudioSrc
     }
 }
-export default PlayAudio;
+export default connect(mapStateToProps)(PlayAudio);

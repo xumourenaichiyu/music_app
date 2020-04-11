@@ -1,16 +1,13 @@
-import {SET_AUDIO_SRC} from './typeCreator';
+
 const defaultState = {
-    AudioSrc : ''
+    Audio : new Audio(),//播放器实例对象
+    musicList : [],//音乐播放列表
 }
 
 const reducer = (state=defaultState , action)=>{
     switch (action.type){
-        case SET_AUDIO_SRC : 
-            state.AudioSrc = action.payload;
-            break;
-        default : 
-            break;
+        default:
+            return {...state}
     }
-    return JSON.parse(JSON.stringify(state))
 }
 export default reducer;

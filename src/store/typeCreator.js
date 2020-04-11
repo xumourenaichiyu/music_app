@@ -1,1 +1,1 @@
-export const SET_AUDIO_SRC = 'SET_AUDIO_SRC';
+export const CREATE_AUDIO = 'CREATE_AUDIO';//创建新的播放器
